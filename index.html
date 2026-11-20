@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Ground · pure HTML + CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a2e1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+
+        .card {
+            background: #2f542f;
+            padding: 14px;
+            border-radius: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            border: 1px solid #5f8a5f;
+        }
+
+        .ground {
+            position: relative;
+            width: 380px;
+            height: 250px;
+            background: radial-gradient(circle at 30% 40%, #6fbf6f, #2b6b2b);
+            border-radius: 50% / 40%;
+            box-shadow: 0 0 0 4px #8bb87b, 0 0 0 8px #4d7a4d;
+            margin: 0 auto;
+            overflow: visible;
+        }
+
+        /* pitch */
+        .pitch {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 70px;
+            background: #d9c9a6;
+            transform: translate(-50%, -50%);
+            border-radius: 6px;
+            border: 1px solid #b8a07e;
+            z-index: 5;
+        }
+
+        /* stumps (simple lines) */
+        .stumps {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+        }
+        .stumps::before {
+            content: '';
+            position: absolute;
+            top: -16px;
+            left: -2px;
+            width: 2px;
+            height: 10px;
+            background: #e8d5b0;
+            box-shadow: 5px 0 0 #e8d5b0, 10px 0 0 #e8d5b0;
+        }
+        .stumps::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: -2px;
+            width: 2px;
+            height: 10px;
+            background: #e8d5b0;
+            box-shadow: 5px 0 0 #e8d5b0, 10px 0 0 #e8d5b0;
+        }
+
+        /* fielders - very simple circles */
+        .fielder {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: #f5f0d7;
+            border-radius: 50%;
+            border: 2px solid #3b5e3b;
+            box-shadow: 0 2px 0 #1f3a1f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: bold;
+            color: #1d3a1d;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        /* fielder positions */
+        .f1 { top: 15%; left: 15%; }
+        .f2 { top: 10%; left: 75%; }
+        .f3 { top: 35%; left: 90%; }
+        .f4 { top: 70%; left: 82%; }
+        .f5 { top: 85%; left: 50%; }
+        .f6 { top: 70%; left: 12%; }
+        .f7 { top: 35%; left: 5%; }
+        .f8 { top: 22%; left: 42%; }
+        .f9 { top: 72%; left: 32%; }
+
+        /* boundary rings (just for looks) */
+        .ring1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 58%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px dashed #b3d9a0;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        .ring2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 92%;
+            height: 82%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid #b3d9a0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* info text */
+        .info {
+            text-align: center;
+            margin-top: 12px;
+            color: #cfe2c0;
+            font-size: 0.8rem;
+            background: #1f3a1f80;
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* responsive */
+        @media (max-width: 450px) {
+            .ground {
+                width: 85vw;
+                height: 56vw;
+            }
+            .fielder {
+                width: 18px;
+                height: 18px;
+                font-size: 7px;
+            }
+            .pitch {
+                width: 10px;
+                height: 50px;
+            }
+            .stumps::before, .stumps::after {
+                height: 8px;
+                box-shadow: 4px 0 0 #e8d5b0, 8px 0 0 #e8d5b0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="ground">
+            <!-- pitch -->
+            <div class="pitch"></div>
+            <div class="stumps"></div>
+
+            <!-- 9 fielders with short labels -->
+            <div class="fielder f1">SL</div>
+            <div class="fielder f2">CV</div>
+            <div class="fielder f3">PT</div>
+            <div class="fielder f4">3R</div>
+            <div class="fielder f5">FN</div>
+            <div class="fielder f6">MO</div>
+            <div class="fielder f7">MN</div>
+            <div class="fielder f8">SP</div>
+            <div class="fielder f9">MW</div>
+
+            <!-- decorative rings -->
+            <div class="ring1"></div>
+            <div class="ring2"></div>
+        </div>
+
+        <div class="footer">
+            <div class="info">🏏 9 fielders · static layout</div>
+        </div>
+    </div>
+</body>
+</html>
